@@ -53,23 +53,19 @@ cd posthub
 
 ### Database Setup
 
-rails db:create
-rails db:migrate
-rails db:seed
+- rails db:create
+- rails db:migrate
+- rails db:seed
 
 ### Starting the Server
 
-rails server
+- rails server
 
 ## Testing
 
 To run tests:
-rspec
+- rspec
 
 ## Contributing
 
 This project is open to contributions. If you would like to improve it or fix issues, please feel free to create a pull request.
-
-## License
-
-This project is distributed under the MIT License. See the LICENSE file for more details.
