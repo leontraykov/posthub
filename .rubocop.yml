@@ -1,0 +1,4 @@
+require: rubocop-rails
+Metrics/BlockLength:
+  Exclude:
+    - db/schema.rb

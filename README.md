@@ -2,7 +2,8 @@
 
 ## Project Description
 
-PostHub is a Ruby on Rails web application designed to manage posts, users, and their ratings. It allows users to create posts, rate them, and analyze IPs that have been used by multiple different users for posting.
+PostHub is a Ruby on Rails web application specifically designed as a REST API to manage posts, users, and their ratings.
+It allows users to create posts, rate them, and analyze IPs that have been used by multiple different users for posting.
 
 ## Features
 
@@ -15,9 +16,10 @@ PostHub is a Ruby on Rails web application designed to manage posts, users, and 
 
 ### Technical Details
 
-- **Ruby on Rails**: Uses the latest stable version of Ruby on Rails.
+- **Ruby**: Ruby version 3.3.0.
+- **Ruby on Rails**: Rails version 7.1.3.2.
 - **PostgreSQL**: PostgreSQL is used as the database management system.
-- **Frontend**: Interactions with the application are handled via REST API.
+- **API-only Application**: No front-end components are included, as it's designed to be accessed through its REST API.
 
 ## API Endpoints
 
@@ -48,7 +50,7 @@ PostHub is a Ruby on Rails web application designed to manage posts, users, and 
 
 ### Cloning the Repository
 
-git clone https://github.com/yourusername/posthub.git
+git clone git@github.com:leontraykov/posthub.git
 cd posthub
 
 ### Database Setup
@@ -65,7 +67,3 @@ cd posthub
 
 To run tests:
 - rspec
-
-## Contributing
-
-This project is open to contributions. If you would like to improve it or fix issues, please feel free to create a pull request.
