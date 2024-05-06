@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 # PostsController manages the creation, display, and retrieval of posts.
 # It includes actions for creating posts, retrieving individual posts, fetching top-rated posts,
 # and finding IP addresses with multiple authors.
@@ -9,15 +7,15 @@ class PostsController < ActionController::API
   # POST /posts
   # Creates a new post under the specified user.
   # If the user with the given login does not exist, the user will be created.
+
   def create
     @user = User.find_or_create_by(login: params[:post][:login])
-    @post = @user.posts.build(post_params)
+    return render_user_error unless @user.persisted?
 
-    if @post.save
-      render json: @post, status: :created
-    else
-      render json: { errors: @post.errors.messages }, status: :unprocessable_entity
-    end
+    @post = @user.posts.build(post_params)
+    return render_post_error unless @post.save
+
+    render json: @post, status: :created
   end
 
   # GET /posts/:id
@@ -58,6 +56,14 @@ class PostsController < ActionController::API
   end
 
   private
+
+  def render_user_error
+    render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def render_post_error
+    render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+  end
 
   # Strong parameters to protect against unwanted input.
   # Allows only title, body, and IP address to be accepted for posts.

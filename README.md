@@ -22,6 +22,35 @@ It allows users to create posts, rate them, and analyze IPs that have been used 
 - **PostgreSQL**: PostgreSQL is used as the database management system.
 - **Testing**: Tests are written using RSpec.
 
+## Database Setup
+
+### Quick Setup
+
+  To quickly set up the database, including creation, migration, and seeding, you can run:
+
+  ```bash
+  rails db:reset
+  ```
+  This command resets your database to a clean state, running all migrations and seeds defined in your Rails application.
+
+### Step-by-Step Setup
+
+  Alternatively, you can set up your database step by step:
+
+  1. Create the database:
+  ```
+  rails db:create
+  ```
+  2. Run migrations:
+  ```
+  rails db:migrate
+  ```
+  3. Seed the database:
+  ```
+  rails db:seed
+  ```
+  These commands will separately create your database, run migrations to structure it, and seed it with initial data if necessary.
+
 ## API Endpoints
 
 ### POST /posts
@@ -32,10 +61,19 @@ It allows users to create posts, rate them, and analyze IPs that have been used 
   - `login`: User login.
   - `ip`: User IP address.
 - **Example**:
-  ```
+  ```bash
   curl -X POST http://localhost:3000/posts \
   -H "Content-Type: application/json" \
-  -d '{"title": "Sample Post", "body": "This is a sample post body.", "login": "user1", "ip": "192.168.1.1"}'
+  -d '{"post": {"title": "Sample Post", "body": "This is a sample post body.", "login": "user1", "ip": "192.168.1.1"}}'
+  ```
+### GET /posts/:id
+- **Description**: Retrieves a specific post by its ID.
+- **Parameters**:
+  - `id`: The ID of the post.
+- **Example**:
+  ```bash
+  curl -X GET http://localhost:3000/posts/{5} \
+  -H "Content-Type: application/json"
   ```
 
 ### POST /ratings
@@ -46,10 +84,10 @@ It allows users to create posts, rate them, and analyze IPs that have been used 
   - `user_id`: The ID of the user.
   - `value`: The rating value (from 1 to 5).
 - **Example**:
-  ```
+  ```bash
   curl -X POST http://localhost:3000/ratings \
   -H "Content-Type: application/json" \
-  -d '{"post_id": 1, "user_id": 1, "value": 5}'
+  -d '{"rating": {"post_id": 1, "user_id": 1, "value": 5}}'
   ```
 
 ### GET /posts/top?n=5
@@ -58,16 +96,18 @@ It allows users to create posts, rate them, and analyze IPs that have been used 
 - **Parameters**:
   - `n`: Number of posts to display
 - **Example**:
-  ```
-  curl -X GET "http://localhost:3000/posts/top?n=5"
+  ```bash
+  curl -X GET "http://localhost:3000/posts/top?n=5" \
+  -H "Content-Type: application/json"
   ```
 
 ### GET /ips_with_multiple_authors
 
 - **Description**: Returns a list of IP addresses that have been used to publish posts by multiple different users.
 - **Example**:
-  ```
-  curl -X GET http://localhost:3000/ips_with_multiple_authors
+  ```bash
+  curl -X GET http://localhost:3000/ips_with_multiple_authors \
+  -H "Content-Type: application/json"
   ```
 
 ### Testing
