@@ -18,8 +18,9 @@ It allows users to create posts, rate them, and analyze IPs that have been used 
 
 - **Ruby**: Ruby version 3.3.0.
 - **Ruby on Rails**: Rails version 7.1.3.2.
-- **PostgreSQL**: PostgreSQL is used as the database management system.
 - **API-only Application**: No front-end components are included, as it's designed to be accessed through its REST API.
+- **PostgreSQL**: PostgreSQL is used as the database management system.
+- **Testing**: Tests are written using RSpec.
 
 ## API Endpoints
 
@@ -68,3 +69,6 @@ It allows users to create posts, rate them, and analyze IPs that have been used 
   ```
   curl -X GET http://localhost:3000/ips_with_multiple_authors
   ```
+
+### Testing
+- To run tests, use `rspec -f d` for detailed output.
