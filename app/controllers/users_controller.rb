@@ -2,7 +2,7 @@
 
 # UsersController manages user creation within the application.
 # It includes actions to handle user data sent through API requests.
-class UsersController < ApplicationController
+class UsersController < ActionController::API
   # POST /users
   # Creates a new user with a unique login.
   def create

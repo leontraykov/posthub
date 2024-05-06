@@ -1,4 +1,8 @@
 require: rubocop-rails
 Metrics/BlockLength:
+  Max: 25
+  ExcludedMethods:
+    - describe
+    - context
   Exclude:
     - db/schema.rb

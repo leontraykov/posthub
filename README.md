@@ -30,40 +30,41 @@ It allows users to create posts, rate them, and analyze IPs that have been used 
   - `body`: The body of the post.
   - `login`: User login.
   - `ip`: User IP address.
+- **Example**:
+  ```
+  curl -X POST http://localhost:3000/posts \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Sample Post", "body": "This is a sample post body.", "login": "user1", "ip": "192.168.1.1"}'
+  ```
 
 ### POST /ratings
+
 - **Description**: Adds a rating to a post.
 - **Parameters**:
   - `post_id`: The ID of the post.
   - `user_id`: The ID of the user.
   - `value`: The rating value (from 1 to 5).
+- **Example**:
+  ```
+  curl -X POST http://localhost:3000/ratings \
+  -H "Content-Type: application/json" \
+  -d '{"post_id": 1, "user_id": 1, "value": 5}'
+  ```
 
 ### GET /posts/top?n=5
+
 - **Description**: Returns the top-N posts by average rating.
 - **Parameters**:
-  - `n`: Number of posts to display.
+  - `n`: Number of posts to display
+- **Example**:
+  ```
+  curl -X GET "http://localhost:3000/posts/top?n=5"
+  ```
 
 ### GET /ips_with_multiple_authors
+
 - **Description**: Returns a list of IP addresses that have been used to publish posts by multiple different users.
-
-## Setup and Launch
-
-### Cloning the Repository
-
-git clone git@github.com:leontraykov/posthub.git
-cd posthub
-
-### Database Setup
-
-- rails db:create
-- rails db:migrate
-- rails db:seed
-
-### Starting the Server
-
-- rails server
-
-## Testing
-
-To run tests:
-- rspec
+- **Example**:
+  ```
+  curl -X GET http://localhost:3000/ips_with_multiple_authors
+  ```
