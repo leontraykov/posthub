@@ -4,7 +4,7 @@
 
 # Uncomment this method to be able to run validations before saving objects
 Rails.logger.info 'Validations OFF. If required uncomment validate_records method in seeds.rb
-and the lines where this method is applied'
+ and the lines where this method is applied'
 # def validate_records(records, model)
 #   Rails.logger.info "Validating #{model.name.downcase.pluralize} =>"
 #   valid_records = records.filter { |record| model.new(record).valid? }
