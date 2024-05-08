@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Posts API', type: :request do
   let(:user) { FactoryBot.create(:user) }
 
-  describe 'POST /posts' do
+  describe 'POST /posts', :n_plus_one do
     let(:valid_attributes) { { post: { title: 'Test Title', body: 'Test Body', login: user.login, ip: '127.0.0.1' } } }
     let(:invalid_attributes) { { post: { title: '', body: '', login: user.login, ip: '' } } }
 
@@ -25,7 +25,7 @@ RSpec.describe 'Posts API', type: :request do
     end
   end
 
-  describe 'GET /posts/:id' do
+  describe 'GET /posts/:id', :n_plus_one do
     let(:post) { FactoryBot.create(:post, user:) }
 
     it 'retrieves a specific post by id' do
@@ -36,7 +36,7 @@ RSpec.describe 'Posts API', type: :request do
   end
 
   context 'Complex queries' do
-    describe 'GET /top_posts' do
+    describe 'GET /top_posts', :n_plus_one do
       let!(:posts) { FactoryBot.create_list(:post, 5, user:) }
 
       before { posts.each { |post| FactoryBot.create(:rating, post:, value: 5) } }
@@ -51,7 +51,7 @@ RSpec.describe 'Posts API', type: :request do
       end
     end
 
-    describe 'GET /ips_with_multiple_authors' do
+    describe 'GET /ips_with_multiple_authors', :n_plus_one do
       let!(:other_user) { FactoryBot.create(:user) }
       let!(:post1) { FactoryBot.create(:post, user:, ip: '192.168.1.1') }
       let!(:post2) { FactoryBot.create(:post, user: other_user, ip: '192.168.1.1') }

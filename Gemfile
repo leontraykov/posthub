@@ -17,6 +17,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'n_plus_one_control'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
 end

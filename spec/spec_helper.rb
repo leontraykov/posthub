@@ -21,6 +21,8 @@ module ResponseJSON
   end
 end
 
+require 'n_plus_one_control/rspec'
+
 RSpec.configure do |config|
   config.include ResponseJSON
   # rspec-expectations config goes here. You can use an alternate

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
-  describe 'POST /users' do
+  describe 'POST /users', :n_plus_one do
     let(:valid_attributes) { { user: { login: 'unique_login' } } }
 
     context 'when the request is valid' do

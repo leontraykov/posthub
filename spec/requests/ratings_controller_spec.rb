@@ -7,7 +7,7 @@ RSpec.describe 'Ratings API', type: :request do
   let(:post_item) { FactoryBot.create(:post, user:) }
   let(:valid_attributes) { { post_id: post_item.id, user_id: user.id, value: 5 } }
 
-  describe 'POST /ratings' do
+  describe 'POST /ratings', :n_plus_one do
     context 'when the request is valid' do
       it 'creates a new rating' do
         expect do
