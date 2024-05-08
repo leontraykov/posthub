@@ -14,14 +14,14 @@ Rails.logger.info 'Validations OFF. If required uncomment validate_records metho
 
 # Creating users
 Rails.logger.info 'Creating users =>'
-users = 100.times.map { |i| { login: "user_#{i}", created_at: Time.current, updated_at: Time.current } }
+users = Array.new(100) { |i| { login: "user_#{i}", created_at: Time.current, updated_at: Time.current } }
 # users = validate_records(users, User)
 User.insert_all(users)
 Rails.logger.info 'Users have been created!'
 
 # Creating IP addresses
 Rails.logger.info 'Creating IP adresses =>'
-ips = 50.times.map { |_i| "192.168.#{rand(1..254)}.#{rand(1..254)}" }
+ips = Array.new(50) { |_i| "192.168.#{rand(1..254)}.#{rand(1..254)}" }
 Rails.logger.info 'IP adresses have been created!'
 
 # Creating posts
