@@ -19,7 +19,7 @@ RSpec.describe 'Posts API', type: :request do
     it 'does not create a post with invalid attributes' do
       post posts_path, params: { post: { title: '', body: '', login: user.login, ip: '127.0.0.1' } }
       expect(response).to have_http_status(:unprocessable_entity)
-      errors = JSON.parse(response.body)['errors']
+      errors = JSON.parse(response.body)
       expect(errors).to include("Title can't be blank")
       expect(errors).to include("Body can't be blank")
     end

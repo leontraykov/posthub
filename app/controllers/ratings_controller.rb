@@ -5,12 +5,13 @@
 class RatingsController < ActionController::API
   # Creates a new rating after validating conditions.
   def create
-    @post = load_post
-    @rating = build_rating
+    @post = Post.find(params[:rating][:post_id])
+    result = RatingCreationService.new(@post, rating_params).call
 
-    # Handle the rating creation within a transaction.
-    ActiveRecord::Base.transaction do
-      handle_rating_creation
+    if result[:error]
+      render json: { error: result[:error] }, status: result[:status]
+    else
+      render json: { rating: result[:rating], average_rating: result[:average_rating] }, status: result[:status]
     end
   end
 

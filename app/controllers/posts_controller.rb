@@ -9,13 +9,9 @@ class PostsController < ActionController::API
   # If the user with the given login does not exist, the user will be created.
 
   def create
-    @user = User.find_or_create_by(login: params[:post][:login])
-    return render_user_error unless @user.persisted?
-
-    @post = @user.posts.build(post_params)
-    return render_post_error unless @post.save
-
-    render json: @post, status: :created
+    user = User.find_or_create_by(login: params[:post][:login])
+    result = PostCreationService.new(user, post_params).call
+    render json: result[:json], status: result[:status]
   end
 
   # GET /posts/:id
@@ -41,18 +37,7 @@ class PostsController < ActionController::API
   # GET /ips_with_multiple_authors
   # Returns a list of IP addresses that have posts published by multiple unique authors.
   def ips_with_multiple_authors
-    # Select only IP addresses with more than one unique author.
-    ips = Post.select(:ip).group(:ip).having('COUNT(DISTINCT user_id) > 1').pluck(:ip)
-
-    # Fetch all posts matching these IPs in a single query.
-    posts_with_ips = Post.includes(:user).where(ip: ips)
-
-    # Group posts by IP and gather unique user logins for each IP.
-    authors_by_ip = posts_with_ips.group_by(&:ip).transform_values do |posts|
-      posts.map { |post| post.user.login }.uniq # Extract unique logins.
-    end
-
-    render json: authors_by_ip # Return the grouped IP addresses and logins as JSON.
+    render json: IpAnalysisService.new.call
   end
 
   private
